@@ -6,13 +6,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 class userManagement {
-    String file;
+    private String file,sort[],user,filename;
     int i,index;
-    String sort[];
     Boolean status;
-    String filename = "info.txt";
     Scanner input;
-    String user;
     public userManagement(String filename){
         File txtfile = new File(filename); 
         try {
@@ -62,9 +59,24 @@ class userManagement {
         p=findUser();
         if(p>-1){
             System.out.print(p);
-            
+            sort[p]="";
         }
     }
+}
+class inventory{
+    String file,sort[];
+    public inventory(String filename){
+        File txtfile = new File(filename); 
+        try {
+            Scanner read = new Scanner(txtfile);
+            while(read.hasNextLine()){
+                file = read.nextLine();
+                sort = file.split(",");                 
+            }          
+            read.close();
+        } catch (FileNotFoundException e) { e.printStackTrace(); }
+    }
+
 }
 public class app {
     public static void main(String[] args) {
@@ -72,6 +84,7 @@ public class app {
         userManagement u = new userManagement("info.txt");
         //u.findUser();
         //u.addUser();
-        u.deleteUser();
+        //u.deleteUser();
+
     }
 }
